@@ -1,13 +1,25 @@
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { deleteContact } from "../../redux/appActions";
 
-const ContactsList = ({ filter, onClick }) => {
+const ContactsList = ({ filter, contacts, deleteContact }) => {
+  const contactsList = contacts.filter((item) => {
+    return item.name.toLowerCase().includes(filter.toLowerCase());
+  });
+
   return (
     <ul>
-      {filter.map(el => {
+      {contactsList.map((el) => {
         return (
           <li key={el.id}>
-            {el.name + ':' + el.number}{' '}
-            <button onClick={onClick} id={el.id} type="button">
+            {el.name + ":" + el.number}{" "}
+            <button
+              onClick={(event) => {
+                deleteContact(event.target.id);
+              }}
+              id={el.id}
+              type="button"
+            >
               Delete
             </button>
           </li>
@@ -17,7 +29,9 @@ const ContactsList = ({ filter, onClick }) => {
   );
 };
 
-export default ContactsList;
+export default connect(({ contacts, filter }) => ({ contacts, filter }), {
+  deleteContact,
+})(ContactsList);
 
 ContactsList.propTypes = {
   onClick: PropTypes.func.isRequired,
