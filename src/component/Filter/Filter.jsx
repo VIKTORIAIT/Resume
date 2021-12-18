@@ -1,12 +1,13 @@
-import { connect } from "react-redux";
-import { setFilter } from "../../redux/appActions";
+import * as actions from '../../redux/appActions';
+import { useDispatch } from 'react-redux';
 
-const Filter = ({ setFilter }) => {
+const Filter = () => {
+  const dispatch = useDispatch();
   return (
     <div>
       <p>Find Contacts by Name</p>
       <input
-        onChange={(e) => setFilter(e.target.value)}
+        onChange={e => dispatch(actions.setFilter(e.target.value))}
         type="text"
         name="filter"
         pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
@@ -16,8 +17,4 @@ const Filter = ({ setFilter }) => {
   );
 };
 
-const mapStateToProps = ({ filter }) => ({
-  filter,
-});
-
-export default connect(mapStateToProps, { setFilter })(Filter);
+export default Filter;

@@ -1,12 +1,15 @@
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
-import { deleteContact } from "../../redux/appActions";
+import * as actions from "../../redux/appActions";
+import { useDispatch, useSelector } from "react-redux";
 
-const ContactsList = ({ filter, contacts, deleteContact }) => {
+const ContactsList = () => {
+  const dispatch = useDispatch();
+  const filter = useSelector((state) => state.contacts.filter);
+  const contacts = useSelector((state) => {
+    return state.contacts.contacts;
+  });
   const contactsList = contacts.filter((item) => {
     return item.name.toLowerCase().includes(filter.toLowerCase());
   });
-
   return (
     <ul>
       {contactsList.map((el) => {
@@ -15,7 +18,7 @@ const ContactsList = ({ filter, contacts, deleteContact }) => {
             {el.name + ":" + el.number}{" "}
             <button
               onClick={(event) => {
-                deleteContact(event.target.id);
+                dispatch(actions.deleteContact(event.target.id));
               }}
               id={el.id}
               type="button"
@@ -29,11 +32,4 @@ const ContactsList = ({ filter, contacts, deleteContact }) => {
   );
 };
 
-export default connect(({ contacts, filter }) => ({ contacts, filter }), {
-  deleteContact,
-})(ContactsList);
-
-ContactsList.propTypes = {
-  onClick: PropTypes.func.isRequired,
-  filter: PropTypes.array,
-};
+export default ContactsList;
