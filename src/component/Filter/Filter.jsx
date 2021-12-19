@@ -1,5 +1,5 @@
-import * as actions from '../../redux/appActions';
-import { useDispatch } from 'react-redux';
+import * as actions from "../../redux/appActions";
+import { useDispatch } from "react-redux";
 
 const Filter = () => {
   const dispatch = useDispatch();
@@ -7,7 +7,7 @@ const Filter = () => {
     <div>
       <p>Find Contacts by Name</p>
       <input
-        onChange={e => dispatch(actions.setFilter(e.target.value))}
+        // onChange={e => dispatch(actions.setFilter(e.target.value))}
         type="text"
         name="filter"
         pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"

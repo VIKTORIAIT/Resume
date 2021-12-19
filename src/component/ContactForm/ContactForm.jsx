@@ -1,26 +1,36 @@
-import s from './ContactForm.module.css';
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import * as actions from '../../redux/appActions';
+import s from "./ContactForm.module.css";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+// import * as actions from "../../redux/appActions";
+import { addContact } from "../../redux/contactsOperations";
 
 function ContactForm() {
   const dispatch = useDispatch();
-  const [name, setName] = useState('');
+  const [name, setName] = useState("");
   const [number, setNumber] = useState(null);
+  const contacts = useSelector((data) => data.contacts.contacts);
 
-  const onChangeName = e => {
+  const onChangeName = (e) => {
     setName(e.target.value);
   };
 
-  const onChangeNumber = e => {
+  const onChangeNumber = (e) => {
     setNumber(e.target.value);
   };
 
   return (
     <form
-      onSubmit={e => {
+      onSubmit={(e) => {
         e.preventDefault();
-        dispatch(actions.addContact(name, number));
+        console.log(addContact);
+        const isIncluded = contacts.some((el) => el.name === name);
+        // console.log(isIncluded);
+        if (isIncluded) {
+          alert("This name already exist in your contacts!");
+          return;
+        }
+        dispatch(addContact(name, number));
+        // dispatch(actions.addContact(name, number));
       }}
       className={s.formStyle}
     >
