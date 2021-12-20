@@ -1,13 +1,13 @@
-import * as actions from "../../redux/appActions";
+import Filter from "../../redux/appActions";
 import { useDispatch } from "react-redux";
 
-const Filter = () => {
+const FilterEl = () => {
   const dispatch = useDispatch();
   return (
     <div>
       <p>Find Contacts by Name</p>
       <input
-        // onChange={e => dispatch(actions.setFilter(e.target.value))}
+        onChange={(e) => dispatch(Filter(e.target.value))}
         type="text"
         name="filter"
         pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
@@ -17,4 +17,4 @@ const Filter = () => {
   );
 };
 
-export default Filter;
+export default FilterEl;

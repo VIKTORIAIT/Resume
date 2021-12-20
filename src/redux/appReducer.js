@@ -1,47 +1,38 @@
 import { combineReducers } from "redux";
 import { createReducer } from "@reduxjs/toolkit";
-import * as actions from "./appActions";
+import Filter from "./appActions";
+import {
+  fetchContactsListOperation,
+  deleteContactsOperation,
+  addContactOperation,
+} from "./contactsOperations";
 
 const contacts = createReducer([], {
-  [actions.fetchContactSuccess]: (_, action) => action.payload,
-  [actions.addContactSuccess]: (state, action) => [...state, action.payload],
+  [fetchContactsListOperation.fulfilled]: (_, action) => action.payload,
+  [addContactOperation.fulfilled]: (state, action) => [
+    ...state,
+    action.payload,
+  ],
+  [deleteContactsOperation.fulfilled]: (state, action) => {
+    return state.filter((el) => el.id !== action.payload.id);
+  },
 });
-
-// [deleteContactSuccess]: (state, { payload }) =>
-//   state.filter(({ id }) => id !== payload),
 
 const error = createReducer(null, {
-  [actions.fetchContactError]: (_, action) => action.payload,
-  [actions.fetchContactRequest]: () => null,
-  [actions.addContactError]: (_, action) => action.payload,
-  [actions.addContactRequest]: () => null,
+  [fetchContactsListOperation.rejected]: (_, action) => action.payload,
+  [fetchContactsListOperation.pending]: () => null,
+  [addContactOperation.rejected]: (_, action) => action.payload,
+  [addContactOperation.pending]: () => null,
+  [deleteContactsOperation.pending]: () => null,
+  [deleteContactsOperation.rejected]: (_, action) => action.payload,
 });
-// const isLoading = createReducer(false, {
-//   [fetchBooks.pending]: () => true,
-//   [fetchBooks.fulfilled]: () => false,
-//   [fetchBooks.rejected]: () => false,
-// });
-// const contacts = createReducer([], {
-//   [ADD_CONTACT]: (state, { payload }) => {
-//     const isIncluded = state.some((el) => el.name === payload.name);
-//     console.log(isIncluded);
-//     if (isIncluded) {
-//       alert("This name already exist in your contacts!");
-//       return state;
-//     }
-//     return [...state, payload];
-//   },
-//   [DELETE_CONTACT]: (state, { payload }) =>
-//     state.filter((el) => el.id !== payload),
-// });
 
-// const filter = createReducer("", {
-//   [SET_FILTER]: (state, { payload }) => payload,
-// });
+const filter = createReducer("", {
+  [Filter]: (state, { payload }) => payload,
+});
 
 export default combineReducers({
   contacts,
-  // isLoading,
   error,
-  // filter,
+  filter,
 });

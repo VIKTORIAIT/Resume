@@ -1,8 +1,7 @@
 import s from "./ContactForm.module.css";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-// import * as actions from "../../redux/appActions";
-import { addContact } from "../../redux/contactsOperations";
+import { addContactOperation } from "../../redux/contactsOperations";
 
 function ContactForm() {
   const dispatch = useDispatch();
@@ -22,15 +21,13 @@ function ContactForm() {
     <form
       onSubmit={(e) => {
         e.preventDefault();
-        console.log(addContact);
         const isIncluded = contacts.some((el) => el.name === name);
-        // console.log(isIncluded);
+
         if (isIncluded) {
           alert("This name already exist in your contacts!");
           return;
         }
-        dispatch(addContact(name, number));
-        // dispatch(actions.addContact(name, number));
+        dispatch(addContactOperation({ name, number }));
       }}
       className={s.formStyle}
     >
