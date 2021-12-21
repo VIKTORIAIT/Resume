@@ -1,9 +1,9 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  fetchContactsListOperation,
-  deleteContactsOperation,
-} from "../../redux/contactsOperations";
+// import {
+//   fetchContactsListOperation,
+//   deleteContactsOperation,
+// } from "../../redux/contactsOperations";
 
 const ContactsList = () => {
   const dispatch = useDispatch();
@@ -15,8 +15,8 @@ const ContactsList = () => {
   const contactsList = contacts.filter((item) => {
     return item.name.toLowerCase().includes(filter.toLowerCase());
   });
-  fetchContactsListOperation();
-  useEffect(() => dispatch(fetchContactsListOperation()), [dispatch]);
+  // fetchContactsListOperation();
+  // useEffect(() => dispatch(fetchContactsListOperation()), [dispatch]);
   return (
     <ul>
       {contactsList.map((el) => {
@@ -26,7 +26,7 @@ const ContactsList = () => {
             <button
               onClick={(event) => {
                 console.log();
-                dispatch(deleteContactsOperation(event.target.id));
+                // dispatch(deleteContactsOperation(event.target.id));
               }}
               id={el.id}
               type="button"

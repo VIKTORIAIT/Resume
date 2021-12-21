@@ -1,7 +1,7 @@
 import s from "./ContactForm.module.css";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addContactOperation } from "../../redux/contactsOperations";
+// import { addContactOperation } from "../../redux/contactsOperations";
 
 function ContactForm() {
   const dispatch = useDispatch();
@@ -27,7 +27,7 @@ function ContactForm() {
           alert("This name already exist in your contacts!");
           return;
         }
-        dispatch(addContactOperation({ name, number }));
+        // dispatch(addContactOperation({ name, number }));
       }}
       className={s.formStyle}
     >

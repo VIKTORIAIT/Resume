@@ -1,0 +1,25 @@
+// import { useState } from 'react';
+// import { useDispatch } from 'react-redux';
+// import { authOperations } from '../redux/auth';
+
+export default function LoginView() {
+  return (
+    <div>
+      <h1>Страница логина</h1>
+
+      <form autoComplete="off">
+        <label>
+          Почта
+          <input type="email" name="email" />
+        </label>
+
+        <label>
+          Пароль
+          <input type="password" name="password" />
+        </label>
+
+        <button type="submit">Войти</button>
+      </form>
+    </div>
+  );
+}

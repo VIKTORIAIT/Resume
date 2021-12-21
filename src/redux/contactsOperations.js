@@ -1,38 +1,61 @@
-import {
-  fetchContacts,
-  fetchAddContacts,
-  fetchDeleteContact,
-} from "./appService";
+import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-export const addContactOperation = createAsyncThunk(
-  "contacts/addContact",
-  async ({ name, number }, { rejectWithValue }) => {
-    const contact = {
-      name,
-      number,
-    };
+axios.defaults.baseURL = "https://connections-api.herokuapp.com";
+
+const token = {
+  set(token) {
+    axios.defaults.headers.common.Authorization = `Bearer ${token}`;
+  },
+  unset() {
+    axios.defaults.headers.common.Authorization = "";
+  },
+};
+
+const register = createAsyncThunk(
+  "auth/register",
+  async (credentials, { rejectWithValue }) => {
     try {
-      const contacts = await fetchAddContacts(contact);
-      return contacts;
+      const { data } = await axios.post("/users/signup", credentials);
+      token.set(data.token);
+      return data;
     } catch (error) {
       return rejectWithValue(error);
     }
   }
 );
 
-export const fetchContactsListOperation = createAsyncThunk(
-  "contacts/fetchContacts",
-  async () => {
-    const contacts = await fetchContacts();
-    return contacts;
+const logIn = createAsyncThunk(
+  "auth/login",
+  async (credentials, { rejectWithValue }) => {
+    try {
+      const { data } = await axios.post("/users/login", credentials);
+      token.set(data.token);
+      return data;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
   }
 );
 
-export const deleteContactsOperation = createAsyncThunk(
-  "contacts/deleteContact",
-  async (id) => {
-    const contacts = await fetchDeleteContact(id);
-    return contacts;
-  }
-);
+// export async function fetchContacts() {
+//   const { data } = await axios.get("/contacts");
+//   return data;
+// }
+
+// export async function fetchAddContacts(contact) {
+//   const { data } = await axios.post("/contacts", contact);
+//   return data;
+// }
+
+// export async function fetchDeleteContact(id) {
+//   const { data } = await axios.delete(`/contacts/${id}`);
+//   return data;
+// }
+const operations = {
+  register,
+  // logOut,
+  logIn,
+  // fetchCurrentUser,
+};
+export default operations;
