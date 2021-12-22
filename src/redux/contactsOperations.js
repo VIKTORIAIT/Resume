@@ -1,16 +1,16 @@
-import axios from 'axios';
-import { createAsyncThunk } from '@reduxjs/toolkit';
+import axios from "axios";
+import { createAsyncThunk } from "@reduxjs/toolkit";
 
 // Fetch requests
 
-axios.defaults.baseURL = 'https://connections-api.herokuapp.com';
+axios.defaults.baseURL = "https://connections-api.herokuapp.com";
 export async function fetchContacts() {
-  const { data } = await axios.get('/contacts');
+  const { data } = await axios.get("/contacts");
   return data;
 }
 
 export async function fetchAddContacts(contact) {
-  const { data } = await axios.post('/contacts', contact);
+  const { data } = await axios.post("/contacts", contact);
   return data;
 }
 
@@ -22,7 +22,7 @@ export async function fetchDeleteContact(id) {
 // ++++++++++++++++++++++++++++++++++++++++
 
 export const addContactOperation = createAsyncThunk(
-  'contacts/addContact',
+  "contacts/addContact",
   async ({ name, number }, { rejectWithValue }) => {
     const contact = {
       name,
@@ -34,22 +34,22 @@ export const addContactOperation = createAsyncThunk(
     } catch (error) {
       return rejectWithValue(error);
     }
-  },
+  }
 );
 
 export const fetchContactsListOperation = createAsyncThunk(
-  'contacts/fetchContacts',
+  "contacts/fetchContacts",
   async () => {
     const contacts = await fetchContacts();
     return contacts;
-  },
+  }
 );
 
 export const deleteContactsOperation = createAsyncThunk(
-  'contacts/deleteContact',
-  async id => {
+  "contacts/deleteContact",
+  async (id) => {
     const contacts = await fetchDeleteContact(id);
     const newContacts = await fetchContacts();
     return newContacts;
-  },
+  }
 );
