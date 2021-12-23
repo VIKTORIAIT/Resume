@@ -24,13 +24,6 @@ const AppBarEl = () => {
   const name = useSelector((state) => state.authReducer.user.name);
   const email = useSelector((state) => state.authReducer.user.email);
 
-  // const handleOpenNavMenu = (event) => {
-  //   setAnchorElNav(event.currentTarget);
-  // };
-
-  // const handleCloseNavMenu = () => {
-  //   setAnchorElNav(null);
-
   return (
     <AppBar position="static">
       <Container maxWidth="xl">

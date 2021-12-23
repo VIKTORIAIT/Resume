@@ -6,6 +6,8 @@ import PrivateRoute from "./component/PrivateRoute/PrivateRoute";
 import Container from "./component/Container/Container";
 import PublicRoute from "./component/PublicRoute/PublicRoute";
 import operations from "./redux/authOperations";
+import Box from "@mui/material/Box";
+import Skeleton from "@mui/material/Skeleton";
 
 const ContactsView = lazy(() => import("./views/ContactsView"));
 const HomeView = lazy(() => import("./views/HomeView"));
@@ -25,27 +27,50 @@ export default function App() {
   return (
     <Container>
       {isFetchingUser ? (
-        <h1>Показываем React Skeleton</h1>
+        <Box
+          sx={{
+            marginTop: 200,
+            marginLeft: "auto",
+            marginRight: "auto",
+            width: 500,
+          }}
+        >
+          <Skeleton />
+          <Skeleton animation="wave" />
+          <Skeleton animation={false} />
+        </Box>
       ) : (
+        // <h1>Показываем React Skeleton</h1>
         <div className="container">
           <AppBarEl />
           <Switch>
-            <Suspense fallback={<p>Loading...</p>}>
+            <Suspense
+              fallback={
+                <Box
+                  sx={{
+                    marginTop: 200,
+                    marginLeft: "auto",
+                    marginRight: "auto",
+                    width: 500,
+                  }}
+                >
+                  <Skeleton />
+                  <Skeleton animation="wave" />
+                  <Skeleton animation={false} />
+                </Box>
+              }
+            >
               <PublicRoute exact path="/">
                 <HomeView />
-                {/* <Route component={HomeView} /> */}
               </PublicRoute>
               <PublicRoute path="/register" restricted>
                 <RegisterView />
-                {/* <Route component={RegisterView} /> */}
               </PublicRoute>
               <PublicRoute path="/login" redirectTo="/contacts" restricted>
                 <LoginView />
-                {/* <Route path="/login" component={LoginView} /> */}
               </PublicRoute>
               <PrivateRoute path="/contacts" redirectTo="/login">
                 <ContactsView />
-                {/* <Route component={ContactsView} /> */}
               </PrivateRoute>
             </Suspense>
           </Switch>

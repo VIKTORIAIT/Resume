@@ -1,6 +1,10 @@
 import { useState } from "react";
 import operations from "../redux/authOperations";
 import { useDispatch } from "react-redux";
+import TextField from "@mui/material/TextField";
+import SaveIcon from "@mui/icons-material/Save";
+import LoadingButton from "@mui/lab/LoadingButton";
+import Typography from "@mui/material/Typography";
 
 export default function RegisterView() {
   const dispatch = useDispatch();
@@ -31,45 +35,74 @@ export default function RegisterView() {
     setEmail("");
     setPassword("");
   };
+  const [loading, setLoading] = useState(false);
+  function handleClick() {
+    setLoading(true);
+  }
 
   return (
     <div>
-      <h1>Страница регистрации</h1>
+      <Typography
+        style={{ marginTop: 30 }}
+        variant="h6"
+        gutterBottom
+        component="div"
+      >
+        Страница регистрации
+      </Typography>
 
-      <form onSubmit={onSubmitFunc} autoComplete="off">
-        <label>
-          Имя
-          <input
-            onChange={onHandleChange}
-            name="name"
-            value={name}
-            type="text"
-            name="name"
-          />
-        </label>
+      <form
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          gap: 15,
+          marginLeft: "auto",
+          marginRight: "auto",
+          paddingLeft: 200,
+          paddingRight: 200,
+        }}
+        onSubmit={onSubmitFunc}
+        autoComplete="off"
+      >
+        <TextField
+          id="standard-basic"
+          label="Имя"
+          variant="standard"
+          onChange={onHandleChange}
+          name="name"
+          value={name}
+          type="text"
+        />
+        <TextField
+          id="standard-basic"
+          label="Почта"
+          variant="standard"
+          onChange={onHandleChange}
+          name="email"
+          type="email"
+          value={email}
+        />
+        <TextField
+          style={{ marginBottom: 20 }}
+          id="standard-basic"
+          label="Пароль"
+          variant="standard"
+          onChange={onHandleChange}
+          type="password"
+          name="password"
+          value={password}
+        />
 
-        <label>
-          Почта
-          <input
-            onChange={onHandleChange}
-            name="email"
-            type="email"
-            name="email"
-            value={email}
-          />
-        </label>
-
-        <label>
-          <input
-            onChange={onHandleChange}
-            type="password"
-            name="password"
-            name="password"
-            value={password}
-          />
-        </label>
-
-        <button type="submit">Зарегистрироваться</button>
+        <LoadingButton
+          color="secondary"
+          loading={loading}
+          loadingPosition="start"
+          startIcon={<SaveIcon />}
+          variant="contained"
+          type="submit"
+        >
+          Зарегистрироваться
+        </LoadingButton>
       </form>
     </div>
   );

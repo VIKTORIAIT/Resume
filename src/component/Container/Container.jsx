@@ -8,7 +8,7 @@ const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
   textAlign: "center",
   color: theme.palette.text.secondary,
-  height: 600,
+  height: 1200,
   lineHeight: "60px",
 }));
 
@@ -28,7 +28,7 @@ export default function Container({ children }) {
                 display: "grid",
                 gridTemplateColumns: { md: "1fr 1fr" },
                 width: 800,
-                height: 800,
+                height: 1200,
                 gap: 2,
               }}
             >
