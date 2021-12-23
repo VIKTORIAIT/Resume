@@ -1,0 +1,1 @@
+{"version":3,"sources":["webpack://src/component/ContactForm/ContactForm.module.css"],"names":[],"mappings":"AAAA,8BACE,YAAa,CACb,qBAAsB,CACtB,WAAY,CACZ,gBAAiB,CACjB,iBACF","file":"4.605a2a4a.chunk.css","sourcesContent":[".formStyle {\r\n  display: flex;\r\n  flex-direction: column;\r\n  width: 500px;\r\n  margin-left: auto;\r\n  margin-right: auto;\r\n}\r\n"]}
