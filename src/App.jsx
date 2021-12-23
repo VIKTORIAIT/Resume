@@ -1,8 +1,9 @@
 import { Suspense, lazy, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Switch } from "react-router-dom";
-import AppBar from "./component/AppBar/AppBar";
+import AppBarEl from "./component/AppBarEl/AppBarEl";
 import PrivateRoute from "./component/PrivateRoute/PrivateRoute";
+import Container from "./component/Container/Container";
 import PublicRoute from "./component/PublicRoute/PublicRoute";
 import operations from "./redux/authOperations";
 
@@ -22,12 +23,12 @@ export default function App() {
     dispatch(operations.fetchUser());
   }, [dispatch]);
   return (
-    <>
+    <Container>
       {isFetchingUser ? (
         <h1>Показываем React Skeleton</h1>
       ) : (
         <div className="container">
-          <AppBar />
+          <AppBarEl />
           <Switch>
             <Suspense fallback={<p>Loading...</p>}>
               <PublicRoute exact path="/">
@@ -50,6 +51,6 @@ export default function App() {
           </Switch>
         </div>
       )}
-    </>
+    </Container>
   );
 }

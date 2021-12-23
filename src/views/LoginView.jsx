@@ -1,24 +1,24 @@
-import { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import operations from '../redux/authOperations';
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import operations from "../redux/authOperations";
 
 export default function LoginView() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const dispatch = useDispatch();
 
-  const handleSubmit = e => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(operations.logIn({ email, password }));
-    setEmail('');
-    setPassword('');
+    setEmail("");
+    setPassword("");
   };
 
   const handleChange = ({ target: { name, value } }) => {
     switch (name) {
-      case 'email':
+      case "email":
         return setEmail(value);
-      case 'password':
+      case "password":
         return setPassword(value);
       default:
         return;

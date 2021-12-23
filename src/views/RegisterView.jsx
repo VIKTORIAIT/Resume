@@ -1,22 +1,22 @@
-import { useState } from 'react';
-import operations from '../redux/authOperations';
-import { useDispatch } from 'react-redux';
+import { useState } from "react";
+import operations from "../redux/authOperations";
+import { useDispatch } from "react-redux";
 
 export default function RegisterView() {
   const dispatch = useDispatch();
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-  const onHandleChange = ev => {
+  const onHandleChange = (ev) => {
     switch (ev.target.name) {
-      case 'name':
+      case "name":
         setName(ev.target.value);
         break;
-      case 'email':
+      case "email":
         setEmail(ev.target.value);
         break;
-      case 'password':
+      case "password":
         setPassword(ev.target.value);
         break;
       default:
@@ -24,12 +24,12 @@ export default function RegisterView() {
     }
   };
 
-  const onSubmitFunc = ev => {
+  const onSubmitFunc = (ev) => {
     ev.preventDefault();
     dispatch(operations.register({ name, email, password }));
-    setName('');
-    setEmail('');
-    setPassword('');
+    setName("");
+    setEmail("");
+    setPassword("");
   };
 
   return (
@@ -60,7 +60,6 @@ export default function RegisterView() {
         </label>
 
         <label>
-          Пароль
           <input
             onChange={onHandleChange}
             type="password"

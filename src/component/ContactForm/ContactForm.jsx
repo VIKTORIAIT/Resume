@@ -1,38 +1,50 @@
-import s from './ContactForm.module.css';
-import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { addContactOperation } from '../../redux/contactsOperations';
+import s from "./ContactForm.module.css";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { addContactOperation } from "../../redux/contactsOperations";
+
+import TextField from "@mui/material/TextField";
 
 function ContactForm() {
   const dispatch = useDispatch();
-  const [name, setName] = useState('');
+  const [name, setName] = useState("");
   const [number, setNumber] = useState(null);
-  const contacts = useSelector(data => data.contacts.contacts);
+  const contacts = useSelector((data) => data.contacts.contacts);
 
-  const onChangeName = e => {
+  const onChangeName = (e) => {
     setName(e.target.value);
   };
 
-  const onChangeNumber = e => {
+  const onChangeNumber = (e) => {
     setNumber(e.target.value);
   };
 
   return (
     <form
-      onSubmit={e => {
+      slyle={{
+        display: "flex",
+        flexDirrection: "column",
+        gap: "15",
+        alignItems: "center",
+      }}
+      onSubmit={(e) => {
         e.preventDefault();
-        const isIncluded = contacts.some(el => el.name === name);
+        const isIncluded = contacts.some((el) => el.name === name);
 
         if (isIncluded) {
-          alert('This name already exist in your contacts!');
+          alert("This name already exist in your contacts!");
           return;
         }
         dispatch(addContactOperation({ name, number }));
       }}
       className={s.formStyle}
     >
-      <p>Name</p>
-      <input
+      {/* <p>Name</p> */}
+
+      <TextField
+        id="outlined-password-input"
+        autoComplete="current-password"
+        label="name"
         onChange={onChangeName}
         type="text"
         name="name"
@@ -40,8 +52,11 @@ function ContactForm() {
         title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
         required
       />
-      <p>Phone</p>
-      <input
+      {/* <p>Phone</p> */}
+      <TextField
+        id="outlined-password-input"
+        autoComplete="current-password"
+        label="number"
         onChange={onChangeNumber}
         type="tel"
         name="number"

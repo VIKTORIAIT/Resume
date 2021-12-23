@@ -7,11 +7,11 @@ const Navigation = () => {
   return (
     <nav>
       <NavLink to="/" exact>
-        Главная
+        Phonebook
       </NavLink>
       {/* <NavLink to="/register">Регистрация</NavLink>
     <NavLink to="/login">Логин</NavLink> */}
-      {isLoggedInEl && <NavLink to="/contacts">Контакты</NavLink>}
+      {isLoggedInEl && <NavLink to="/contacts">Contacts</NavLink>}
     </nav>
   );
 };
