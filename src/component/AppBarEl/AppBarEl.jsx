@@ -99,7 +99,7 @@ const AppBarEl = () => {
             )}
           </Box>
 
-          {isLoggedIn && (
+          {/* {isLoggedIn && (
             <Box sx={{ flexGrow: 0 }}>
               <Tooltip>
                 <IconButton>
@@ -107,7 +107,7 @@ const AppBarEl = () => {
                 </IconButton>
               </Tooltip>
             </Box>
-          )}
+          )} */}
         </Toolbar>
       </Container>
     </AppBar>

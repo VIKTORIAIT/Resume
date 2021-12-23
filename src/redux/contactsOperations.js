@@ -48,8 +48,14 @@ export const fetchContactsListOperation = createAsyncThunk(
 export const deleteContactsOperation = createAsyncThunk(
   "contacts/deleteContact",
   async (id) => {
-    const contacts = await fetchDeleteContact(id);
-    const newContacts = await fetchContacts();
-    return newContacts;
+    console.log(id, "id");
+    try {
+      const contacts = await fetchDeleteContact(id);
+      console.log(contacts, "contacts");
+      const newContacts = await fetchContacts();
+      return newContacts;
+    } catch (error) {
+      console.log("error");
+    }
   }
 );

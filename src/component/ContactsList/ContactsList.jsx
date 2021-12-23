@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
+import Button from "@mui/material/Button";
 import Link from "@mui/material/Link";
 import {
   fetchContactsListOperation,
@@ -30,30 +31,31 @@ const ContactsList = () => {
       {contactsList.map((el) => {
         return (
           <Link
-            href="#"
-            underline="always"
-            key={el.id}
             style={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
               marginLeft: "auto",
               marginRight: "auto",
               width: 350,
-              display: "flex",
-              justifyContent: "space-between",
             }}
+            href="#"
+            underline="always"
+            key={el.id}
           >
             {el.name} : {el.number}
-            <IconButton
-              // style={{ height: 45 }}
-              aria-label="delete"
-              size="large"
-              onClick={(event) =>
-                dispatch(deleteContactsOperation(event.target.id))
-              }
+            <Button
+              style={{ height: 30 }}
+              variant="outlined"
+              startIcon={<DeleteIcon />}
               id={el.id}
-              // type="button"
+              onClick={(event) => {
+                dispatch(deleteContactsOperation(event.target.id));
+                console.log(event.target.id);
+              }}
             >
-              <DeleteIcon />
-            </IconButton>
+              Delete
+            </Button>
           </Link>
         );
       })}
