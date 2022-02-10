@@ -26,7 +26,7 @@ body {
   font-weight: bold;
   font-size: 22px;
   line-height: 17px;
-  color: #000000;
+  color: #3991c4;
   margin-bottom: 20px;
 }
 
@@ -48,6 +48,26 @@ body {
   color: #595959;
 }
 /* my projects section */
+
+.pro-list {
+  list-style: none;
+  padding: 0;
+}
+.my-pro-description {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 15px;
+  line-height: 20px;
+  color: #a8a8a8;
+  margin: 0 0 20px 0;
+}
+.descr {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 24px;
+  color: #595959;
+}
 
 .main-content-tittle {
   font-style: normal;
@@ -190,6 +210,10 @@ body {
   font-size: 14px;
   line-height: 24px;
   color: #ffffff;
+}
+.contact-list {
+  display: flex;
+  flex-direction: column;
 }
 
 /* tech skills section */
